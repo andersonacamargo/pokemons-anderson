@@ -1,17 +1,24 @@
 import { Link } from "react-router-dom";
-import pokeball from "../assets/pokebola.png";
+import { GiBattleAxe, GiSharpAxe, GiBatteredAxe, GiWoodAxe } from "react-icons/gi";
 
 function Evolutions(base, evolved, final) {
-    return (<div>
+    return (<div >
         <Link to={`/pokemon/${base}`}>
-            <img src={pokeball} alt={base} style={{ width: '100px' }} />
+            <button>
+                <GiWoodAxe color="black" size="50px" />
+            </button>
         </Link>
         <Link to={`/pokemon/${evolved}`}>
-            <img src={pokeball} alt={evolved} style={{ width: '100px' }} />
+            <button>
+                <GiBatteredAxe color="black" size="50px" />
+            </button>
         </Link>
         <Link to={`/pokemon/${final}`}>
-            <img src={pokeball} alt={final} style={{ width: '100px' }} />
-        </Link></div>);
+            <button>
+                <GiBattleAxe color="black" size="50px" />
+            </button>
+        </Link>
+    </div >);
 }
 
 export default Evolutions;
