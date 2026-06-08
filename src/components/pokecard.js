@@ -1,4 +1,5 @@
 import { GiBrain, GiFallingLeaf, GiFallingRocks, GiFlamer, GiGhost, GiHeavyLightning, GiPunch, GiWaterDrop } from "react-icons/gi";
+import './pokecard.css';
 
 function PokeCard(myPokemon) {
     const iconMap = {

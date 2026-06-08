@@ -1,16 +1,22 @@
 .pokemon {
     text-align: center;
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-image: url('../../assets/card-bg.jpg');
+    background-size: cover;
     padding: 20px;
+    color: lightgray;
 }
 
 .pokemon-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 15px;
+    color: black;
+
 }
 
 .pokemon-card {
@@ -23,8 +29,7 @@
     height: 300px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-transform: capitalize;
-    position: relative;
-    left: 40%;
+
 }
 
 .pokemon-card img {
