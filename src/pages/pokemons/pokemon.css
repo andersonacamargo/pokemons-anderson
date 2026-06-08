@@ -1,22 +1,65 @@
-.pokemon { text-align: center; font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
-.pokemon-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
-.pokemon-card { 
+.pokemon {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.pokemon-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    flex-direction: column;
+}
+
+.pokemon-card {
     --second-color: grey;
     background-image: radial-gradient(white, var(--second-color));
-    border-radius: 10px; 
+    border-radius: 10px;
     border: 2px;
-    padding: 10px; 
-    width: 200px; 
+    padding: 10px;
+    width: 200px;
     height: 300px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
-    text-transform: capitalize; }
-.pokemon-card img { width: 150px; height: 150px; }
-.pokemon-card.normal {
-    --second-color: grey;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-transform: capitalize;
+    position: relative;
+    left: 40%;
 }
-.pokemon-card.fire {
+
+.pokemon-card img {
+    width: 150px;
+    height: 150px;
+}
+
+.pokemon-card.Corpo {
+    --second-color: red;
+}
+
+.pokemon-card.Mente {
+    --second-color: deepPink;
+}
+
+.pokemon-card.Sombrio {
+    --second-color: purple;
+}
+
+.pokemon-card.Fogo {
     --second-color: orange;
 }
-.pokemon-card.water {
+
+.pokemon-card.Agua {
     --second-color: cyan;
+}
+
+.pokemon-card.Natureza {
+    --second-color: green;
+}
+
+.pokemon-card.Tempestade {
+    --second-color: yellow;
+}
+
+.pokemon-card.Terra {
+    --second-color: brown;
 }

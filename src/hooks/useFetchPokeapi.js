@@ -9,6 +9,8 @@ function useFetchPokeapi(pokemon) {
   const [evolutions, setEvolution] = useState({});
   const [species, setSpecies] = useState({});
   const [myPokemon, setMyPokemon] = useState({});
+  const [tipo, setTipo] = useState('')
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -67,36 +69,82 @@ function useFetchPokeapi(pokemon) {
   }, [species]);
 
   useEffect(() => {
+    const typeHandler = async () => {
+      try {
+        if (pokemons.types[0].type.name === 'normal' ||
+          pokemons.types[0].type.name === 'fighting'
+        ) { setTipo('Corpo') }
+        if (pokemons.types[0].type.name === 'psychic' ||
+          pokemons.types[0].type.name === 'fairy'
+        ) { setTipo('Mente') }
+        if (pokemons.types[0].type.name === 'dark' ||
+          pokemons.types[0].type.name === 'ghost'
+        ) { setTipo('Sombrio') }
+
+        if (pokemons.types[0].type.name === 'rock' ||
+          pokemons.types[0].type.name === 'metal' ||
+          pokemons.types[0].type.name === 'ground'
+        ) { setTipo('Terra') }
+        if (pokemons.types[0].type.name === 'poison' ||
+          pokemons.types[0].type.name === 'grass' ||
+          pokemons.types[0].type.name === 'bug'
+        ) { setTipo('Natureza') }
+        if (pokemons.types[0].type.name === 'water' ||
+          pokemons.types[0].type.name === 'ice'
+        ) { setTipo('Agua') }
+        if (pokemons.types[0].type.name === 'dragon' ||
+          pokemons.types[0].type.name === 'flying' ||
+          pokemons.types[0].type.name === 'electric'
+        ) { setTipo('Tempestade') }
+        if (pokemons.types[0].type.name === 'fire'
+        ) { setTipo('Fogo') }
+      }
+      catch (err) {
+        console.log("Ocorreu um erro no tipo")
+      }
+    }
+    typeHandler();
+  }, [pokemons]);
+
+  useEffect(() => {
     const setPoke = async () => {
       try {
-        if (evolutions.chain.evolves_to[0].evolves_to[0] !== undefined) {
-          setMyPokemon({
-            tipo: pokemons.types[0].type.name,
-            name: pokemons.name,
-            hp: pokemons.stats[0].base_stat * 10,
-            atk: pokemons.stats[1].base_stat,
-            img: pokemons.sprites.front_default,
-            evolution_chain: [
+        if (evolutions.chain.evolves_to[0]) {
+          if (evolutions.chain.evolves_to[0].evolves_to[0]) {
+            setMyPokemon({
+              tipo: tipo,
+              name: pokemons.name,
+              hp: pokemons.stats[0].base_stat * 10,
+              atk: pokemons.stats[1].base_stat,
+              img: pokemons.sprites.front_default,
+              evolution_chain: [
+                evolutions.chain.species.name,
+                evolutions.chain.evolves_to[0].species.name,
+                evolutions.chain.evolves_to[0].evolves_to[0].species.name,
+              ],
+            });
+          } if (!evolutions.chain.evolves_to[0].evolves_to[0]) {
+            setMyPokemon({
+              tipo: tipo,
+              name: pokemons.name,
+              hp: pokemons.stats[0].base_stat * 10,
+              atk: pokemons.stats[1].base_stat,
+              img: pokemons.sprites.front_default,
+              evolution_chain: [evolutions.chain.species.name,
               evolutions.chain.evolves_to[0].species.name,
-              evolutions.chain.evolves_to[0].evolves_to[0].species.name,
-            ],
-          });
-        } else if (evolutions.chain.evolves_to[0] !== undefined) {
-          setMyPokemon({
-            tipo: pokemons.types[0].type.name,
-            name: pokemons.name,
-            hp: pokemons.stats[0].base_stat * 10,
-            atk: pokemons.stats[1].base_stat,
-            img: pokemons.sprites.front_default,
-            evolution_chain: [evolutions.chain.evolves_to[0].species.name],
-          });
+              evolutions.chain.evolves_to[0].species.name],
+            });
+          }
         } else {
           setMyPokemon({
-            tipo: pokemons.types[0].type.name,
+            tipo: tipo,
             name: pokemons.name,
             hp: pokemons.stats[0].base_stat * 10,
             atk: pokemons.stats[1].base_stat,
             img: pokemons.sprites.front_shiny,
+            evolution_chain: [
+              evolutions.chain.species.name, evolutions.chain.species.name, evolutions.chain.species.name
+            ],
           });
         }
         console.log(myPokemon);
@@ -106,7 +154,7 @@ function useFetchPokeapi(pokemon) {
       }
     };
     setPoke();
-  }, [evolutions, pokemons]);
+  }, [evolutions, pokemons, tipo]);
 
   return { myPokemon, loading, error };
 }
