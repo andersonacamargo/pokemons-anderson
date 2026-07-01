@@ -16,55 +16,5 @@
     height: 100vh;
     gap: 15px;
     color: black;
-
 }
 
-.pokemon-card {
-    --second-color: grey;
-    background-image: radial-gradient(white, var(--second-color));
-    border-radius: 10px;
-    border: 2px;
-    padding: 10px;
-    width: 200px;
-    height: 300px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-transform: capitalize;
-
-}
-
-.pokemon-card img {
-    width: 150px;
-    height: 150px;
-}
-
-.pokemon-card.Corpo {
-    --second-color: red;
-}
-
-.pokemon-card.Mente {
-    --second-color: deepPink;
-}
-
-.pokemon-card.Sombrio {
-    --second-color: purple;
-}
-
-.pokemon-card.Fogo {
-    --second-color: orange;
-}
-
-.pokemon-card.Agua {
-    --second-color: cyan;
-}
-
-.pokemon-card.Natureza {
-    --second-color: green;
-}
-
-.pokemon-card.Tempestade {
-    --second-color: yellow;
-}
-
-.pokemon-card.Terra {
-    --second-color: brown;
-}

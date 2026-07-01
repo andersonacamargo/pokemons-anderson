@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { getPokemonDB, savePokemonDB } from "../utils/pokemonDB.js";
 
 function useFetchPokeapi(pokemon) {
   console.log("iniciando construção da pagina");
@@ -12,6 +13,7 @@ function useFetchPokeapi(pokemon) {
   const [tipo, setTipo] = useState('')
 
   useEffect(() => {
+
     const getData = async () => {
       try {
         const res = await axios.get(
@@ -26,14 +28,30 @@ function useFetchPokeapi(pokemon) {
         );
 
         setPokemons(res.data);
+
         console.log("Success:", res.data);
+
       } catch (err) {
         console.error("Erro ao carregar API", err);
         setLoading(false);
         setError(true);
       }
     };
-    getData();
+
+    const checkCache = async () => {
+
+      const cached = await getPokemonDB(pokemon);
+
+      if (cached) {
+        console.log("encontrou cache ", cached);
+        setMyPokemon(cached);
+        setLoading(false);
+        return { myPokemon, loading, error };
+      }
+      await getData();
+    };
+
+    checkCache();
   }, [pokemon]);
 
   useEffect(() => {
@@ -149,13 +167,14 @@ function useFetchPokeapi(pokemon) {
         }
         console.log(myPokemon);
         setLoading(false);
+        await savePokemonDB(myPokemon);
+
       } catch (err) {
         console.error("Erro ao carregar API", err);
       }
     };
     setPoke();
   }, [evolutions, pokemons, tipo]);
-
   return { myPokemon, loading, error };
 }
 
